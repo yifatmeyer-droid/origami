@@ -21,7 +21,7 @@ form, form * { box-sizing: border-box; }
 .km-two-col {
   display: grid !important;
   grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr) !important;
-  gap: 16px !important;
+  gap: 8px !important;
   align-items: stretch !important;
   margin-top: 8px;
   direction: rtl; /* first item appears on the right (RTL) */
@@ -108,3 +108,7 @@ form [class*="Field"] {
 .km-section-length .form_data_element_wrap.field_selectlist + .form_data_element_wrap.field_selectlist {
   margin-top: 12px !important;
 }
+.km-two-col > * {
+  padding: 14px 16px !important;  /* אפשר גם 10px */
+}
+
