@@ -85,3 +85,26 @@ form [class*="Field"] {
     grid-template-columns: 1fr !important;
   }
 }
+/* In "אורך שיבוץ" card: make the selectlist fields full width (stack) */
+.km-section-length .form_data_element_wrap.field_selectlist {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+/* Override bootstrap-like column widths if present */
+.km-section-length .form_data_element_wrap.col-sm-6,
+.km-section-length .form_data_element_wrap.col-md-4 {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Some layouts set inline width (like width:25%). This beats it */
+.km-section-length .form_data_element_wrap[style*="width"] {
+  width: 100% !important;
+}
+
+/* Nice spacing between the two fields */
+.km-section-length .form_data_element_wrap.field_selectlist + .form_data_element_wrap.field_selectlist {
+  margin-top: 12px !important;
+}
