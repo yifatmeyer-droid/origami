@@ -1,4 +1,5 @@
-(function () {
+(function () { 
+document.documentElement.setAttribute("data-km-js", "on");
   function findSectionByTitle(titleText) {
     var candidates = Array.from(document.querySelectorAll("body *"))
       .filter(el => (el.innerText || "").trim() === titleText);
