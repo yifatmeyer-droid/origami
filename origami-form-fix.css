@@ -140,3 +140,10 @@ form > div:first-child img {
   max-width: 180px !important; /* אפשר 160 אם את רוצה קטן יותר */
   height: auto !important;
 }
+/* Hide meeting time + duration summary rows */
+.summary-section.desktop-summary .row.meeting-time,
+.summary-section.desktop-summary .row.meeting-duration,
+.summary-section.desktop-summary .row.meeting-length,
+.summary-section.desktop-summary .row.meeting-duration-time {
+  display: none !important;
+}
