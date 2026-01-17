@@ -111,4 +111,10 @@ form [class*="Field"] {
 .km-two-col > * {
   padding: 14px 16px !important;  /* אפשר גם 10px */
 }
+/* Add spacing + thin grey separator above the section that comes after the 2-column cards (מכותבים) */
+.km-two-col + * {
+  margin-top: 18px !important;       /* ריווח מהשני כרטיסים */
+  padding-top: 14px !important;      /* ריווח אחרי הפס */
+  border-top: 1px solid #d6d6d6 !important;  /* הפס האפור הדק */
+}
 
