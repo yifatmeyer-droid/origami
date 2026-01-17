@@ -150,3 +150,12 @@ form > div:first-child img {
 .summary-section.desktop-summary {
   display: none !important;
 }
+/* Force-hide any "duration" summary anywhere (covers cases outside desktop-summary) */
+span.duration {
+  display: none !important;
+}
+
+/* Also hide any calendar summary container if it exists (broader match) */
+.summary-section {
+  display: none !important;
+}
