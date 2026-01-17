@@ -17,7 +17,7 @@
     return null;
   }
 
-  function wrapTwoSectionsSideBySide() {
+  function ensureTwoColWrap() {
     var details = findSectionByTitle("פרטי השיבוץ");
     var length = findSectionByTitle("אורך שיבוץ");
     if (!details || !length) return false;
@@ -29,6 +29,8 @@
       var wrap = document.createElement("div");
       wrap.className = "km-two-col";
       var parent = details.parentNode;
+
+      // keep original DOM order: details first, length second
       parent.insertBefore(wrap, details);
       wrap.appendChild(details);
       wrap.appendChild(length);
@@ -36,43 +38,28 @@
     return true;
   }
 
-  function forceLengthSelectsStack() {
+  function markLengthRowToStack() {
     var length = document.querySelector(".km-section-length");
     if (!length) return false;
 
-    // מצא את שני ה-selects בכרטיס "אורך שיבוץ"
     var selects = Array.from(length.querySelectorAll("select"));
     if (selects.length < 2) return false;
 
-    // קח את שני הראשונים (אלה של "שעת התחלה" ו"אורך שיבוץ")
-    var s1 = selects[0];
-    var s2 = selects[1];
-
-    // מצא את ההורה המשותף הקרוב שלהם
-    function commonAncestor(a, b) {
-      var set = new Set();
-      var cur = a;
-      while (cur) { set.add(cur); cur = cur.parentElement; }
-      cur = b;
-      while (cur) { if (set.has(cur)) return cur; cur = cur.parentElement; }
+    // find a container that holds exactly 2 selects and looks like a "row"
+    function findRow(el) {
+      var cur = el;
+      for (var up = 0; up < 10 && cur && cur !== length; up++) {
+        var selCount = cur.querySelectorAll("select").length;
+        var directBlocks = Array.from(cur.children).filter(c => c.offsetParent !== null);
+        if (selCount === 2 && directBlocks.length >= 2) return cur;
+        cur = cur.parentElement;
+      }
       return null;
     }
 
-    var ca = commonAncestor(s1, s2);
-    if (!ca) return false;
+    var row = findRow(selects[0]) || findRow(selects[1]);
+    if (!row) return false;
 
-    // נעלה עוד קצת כדי להגיע ל"רואו" שמחזיק אותם (לא הכרטיס כולו)
-    var row = ca;
-    for (var up = 0; up < 6 && row && row !== length; up++) {
-      // אם בתוך האלמנט יש בדיוק 2 selects (או 2-3 שדות), זה כנראה הרואו הנכון
-      var count = row.querySelectorAll("select").length;
-      if (count === 2 || count === 3) break;
-      row = row.parentElement;
-    }
-
-    if (!row || row === length) return false;
-
-    // סמן את הרואו כדי שה-CSS יפעל
     row.classList.add("km-length-stack");
     return true;
   }
@@ -80,10 +67,8 @@
   var tries = 0;
   var timer = setInterval(function () {
     tries++;
-
-    var ok1 = wrapTwoSectionsSideBySide();
-    var ok2 = forceLengthSelectsStack();
-
+    var ok1 = ensureTwoColWrap();
+    var ok2 = markLengthRowToStack();
     if ((ok1 && ok2) || tries > 80) clearInterval(timer);
   }, 250);
 })();
