@@ -251,3 +251,14 @@ form [class*="Field"] {
 html[data-km-js="on"] form {
   outline: 3px solid #00c853 !important; /* מסגרת ירוקה סביב הטופס */
 }
+/* wrap the two fields in "אורך שיבוץ" into a vertical stack */
+.km-length-stack {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+
+.km-length-stack > * {
+  width: 100% !important;
+  min-width: 0 !important;
+}
