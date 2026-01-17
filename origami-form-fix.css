@@ -248,3 +248,7 @@ form [class*="Field"] {
 .km-section-length textarea {
   width: 100% !important;
 }
+/* DEBUG: if CSS loads, the submit button will turn red */
+button, input[type="submit"] {
+  background: red !important;
+}
