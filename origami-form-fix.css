@@ -147,3 +147,6 @@ form > div:first-child img {
 .summary-section.desktop-summary .row.meeting-duration-time {
   display: none !important;
 }
+.summary-section.desktop-summary {
+  display: none !important;
+}
