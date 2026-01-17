@@ -125,3 +125,47 @@ form [class*="Field"] {
   flex-direction: column !important;
   align-items: stretch !important;
 }
+/* --- Fix layout inside "אורך שיבוץ": force fields to stack --- */
+
+/* כל קונטיינר פנימי שמארגן שדות בשתי עמודות – נהפוך לעמודה אחת */
+.km-section-length .row,
+.km-section-length [class*="row"],
+.km-section-length [class*="Row"],
+.km-section-length [class*="columns"],
+.km-section-length [class*="Columns"],
+.km-section-length [class*="grid"],
+.km-section-length [class*="Grid"] {
+  display: block !important;
+}
+
+/* אם יש קונטיינר שהוא grid אמיתי */
+.km-section-length [style*="grid"],
+.km-section-length [style*="grid-template-columns"] {
+  display: block !important;
+}
+
+/* אם יש קונטיינר שהוא flex */
+.km-section-length [style*="display:flex"],
+.km-section-length [style*="display: flex"] {
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+/* ודאות שהשדות עצמם תופסים רוחב מלא */
+.km-section-length label,
+.km-section-length .field,
+.km-section-length [class*="field"],
+.km-section-length [class*="Field"],
+.km-section-length select,
+.km-section-length input,
+.km-section-length textarea {
+  display: block;
+  width: 100%;
+}
+
+/* מרווח נעים בין שני השדות */
+.km-section-length .field,
+.km-section-length [class*="field"],
+.km-section-length [class*="Field"] {
+  margin-bottom: 12px !important;
+}
