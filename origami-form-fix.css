@@ -93,15 +93,35 @@ form [class*="Field"] {
   height: 100% !important;
 }
 
-/* Make each card content stack nicely top-to-bottom */
-.km-two-col > *{
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  gap: 10px !important;
-}
-
 /* Ensure fields inside stack one under another */
 .km-two-col > * *{
   max-width: 100%;
+}
+/* keep two columns same height (safe) */
+.km-two-col {
+  align-items: stretch !important;
+}
+.km-two-col > * {
+  height: 100% !important;
+}
+
+/* Only inside the "אורך שיבוץ" card: stack the fields vertically */
+.km-section-length {
+  /* לא משנים display של הכרטיס כדי לא לשבור כותרת */
+}
+
+.km-section-length input,
+.km-section-length select,
+.km-section-length textarea,
+.km-section-length .field,
+.km-section-length [class*="field"],
+.km-section-length [class*="Field"] {
+  width: 100%;
+}
+
+/* אם יש שדות שמופיעים בשורה (inline/flex), נכריח אותם לרדת אחד מתחת לשני */
+.km-section-length [style*="display:flex"],
+.km-section-length [style*="display: flex"] {
+  flex-direction: column !important;
+  align-items: stretch !important;
 }
