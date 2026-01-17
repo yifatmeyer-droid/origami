@@ -1,0 +1,52 @@
+/* =============== */
+/* Origami form fix */
+/* =============== */
+
+/* מרכז ומצר את אזור הטופס */
+[data-origamiformname],
+[data-origamiformid] {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* להפוך את הטופס לגריד של 2 עמודות */
+[data-origamiformname] form,
+[data-origamiformid] form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* ברירת מחדל: כל הילדים תופסים 100% */
+[data-origamiformname] form > *,
+[data-origamiformid] form > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+/* שני הבלוקים לפני הכפתור: חצי-חצי */
+[data-origamiformname] form > :nth-last-child(3),
+[data-origamiformname] form > :nth-last-child(2),
+[data-origamiformid] form > :nth-last-child(3),
+[data-origamiformid] form > :nth-last-child(2) {
+  grid-column: span 1;
+}
+
+/* הכפתור האחרון נשאר על כל הרוחב */
+[data-origamiformname] form > :last-child,
+[data-origamiformid] form > :last-child {
+  grid-column: 1 / -1;
+}
+
+/* מובייל: עמודה אחת */
+@media (max-width: 900px) {
+  [data-origamiformname] form,
+  [data-origamiformid] form {
+    grid-template-columns: 1fr;
+  }
+
+  [data-origamiformname] form > *,
+  [data-origamiformid] form > * {
+    grid-column: 1 / -1;
+  }
+}
