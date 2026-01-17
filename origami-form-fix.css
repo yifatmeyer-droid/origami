@@ -113,9 +113,9 @@ form [class*="Field"] {
 }
 /* Add spacing + thin grey separator above the section that comes after the 2-column cards (מכותבים) */
 .km-two-col + * {
-  margin-top: 18px !important;       /* ריווח מהשני כרטיסים */
-  padding-top: 14px !important;      /* ריווח אחרי הפס */
-  border-top: 1px solid rgba(0,0,0,0.12) !important;
+  margin-top: 14px !important;     /* ריווח קטן יותר */
+  padding-top: 10px !important;    /* ריווח קטן אחרי הפס */
 
+  border-top: none !important;     /* מבטל פס קיים */
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.10) !important; /* פס דק ועדין */
 }
-
