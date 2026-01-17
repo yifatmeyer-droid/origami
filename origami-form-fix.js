@@ -1,5 +1,5 @@
 (function () {
-  document.documentElement.setAttribute("data-km-js", "on");
+  //document.documentElement.setAttribute("data-km-js", "on");
 
   function findSectionByTitle(titleText) {
     var candidates = Array.from(document.querySelectorAll("body *"))
