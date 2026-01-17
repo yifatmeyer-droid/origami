@@ -1,22 +1,24 @@
-/* Origami – ONLY last two blocks side-by-side (before submit) */
-
-/* תופסים את ה"עטיפה" של שני הבלוקים שלפני הכפתור:
-   אנחנו לוקחים את האלמנט השלישי מהסוף (קונטיינר שכולל את שני הסקשנים)
-   והופכים רק אותו לגריד */
-form > :nth-last-child(3) {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+/* 2 columns wrapper */
+.km-two-col {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+  align-items: start !important;
 }
 
-/* כל ילד בתוך הבלוק הזה יקבל רוחב רגיל ולא יגלוש */
-form > :nth-last-child(3) > * {
+/* ensure inner fields don't overflow */
+.km-two-col > * {
   min-width: 0;
 }
 
-/* מובייל: עמודה אחת */
+/* "מכותבים" stays full width (we won't wrap it, but just in case) */
+.km-full-width {
+  grid-column: 1 / -1 !important;
+}
+
+/* Mobile */
 @media (max-width: 900px) {
-  form > :nth-last-child(3) {
-    grid-template-columns: 1fr;
+  .km-two-col {
+    grid-template-columns: 1fr !important;
   }
 }
