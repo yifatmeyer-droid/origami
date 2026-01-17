@@ -1,6 +1,5 @@
 (function () {
   function findSectionByTitle(titleText) {
-    // מחפש אלמנט שמכיל את הטקסט של הכותרת, ואז מטפס לבלוק סקשן
     var candidates = Array.from(document.querySelectorAll("body *"))
       .filter(el => (el.innerText || "").trim() === titleText);
 
@@ -8,7 +7,6 @@
       var el = candidates[i];
       var block = el;
       for (var up = 0; up < 10 && block; up++) {
-        // בלוק סקשן בד"כ מכיל לפחות שדה אחד
         if ((block.tagName === "DIV" || block.tagName === "SECTION") &&
             block.querySelectorAll("input, select, textarea, button").length >= 1) {
           return block;
@@ -20,29 +18,29 @@
   }
 
   function wrapTwoSectionsSideBySide() {
-    var a = findSectionByTitle("אורך שיבוץ");
-    var b = findSectionByTitle("פרטי השיבוץ");
+    var details = findSectionByTitle("פרטי השיבוץ");
+    var length = findSectionByTitle("אורך שיבוץ");
 
-    if (!a || !b) return false;
+    if (!details || !length) return false;
 
-    // אם כבר עטוף – לא לעשות שוב
-    if (a.closest(".km-two-col") || b.closest(".km-two-col")) return true;
+    // mark them so CSS can target specifically
+    details.classList.add("km-section-details");
+    length.classList.add("km-section-length");
 
-    // עוטפים אותם יחד בקונטיינר אחד
+    if (details.closest(".km-two-col") || length.closest(".km-two-col")) return true;
+
     var wrap = document.createElement("div");
     wrap.className = "km-two-col";
 
-    // נכניס את ה-wrapper לפני הראשון מביניהם לפי סדר הופעה ב-DOM
-    var parent = a.parentNode;
-    parent.insertBefore(wrap, a);
+    var parent = details.parentNode;
+    parent.insertBefore(wrap, details);
 
-    wrap.appendChild(a);
-    wrap.appendChild(b);
+    wrap.appendChild(details);
+    wrap.appendChild(length);
 
     return true;
   }
 
-  // אוריגמי נטען דינמית, אז ננסה כמה פעמים
   var tries = 0;
   var timer = setInterval(function () {
     tries++;
