@@ -1,45 +1,38 @@
 /* =========================
-   Origami - nicer layout
-   Works with km-two-col wrapper from JS
+   Origami - clean layout
+   Depends on JS adding:
+   - .km-two-col wrapper
+   - .km-section-length on "אורך שיבוץ" card (optional)
+   - .km-length-stack on the inner container that holds the 2 dropdown fields
    ========================= */
 
-/* 1) Narrow & center the whole form area */
+/* 1) Narrow & center the whole form */
 form {
   max-width: 1100px;
   margin: 0 auto;
   padding: 8px 16px;
   box-sizing: border-box;
-}
-
-/* 2) Improve general typography */
-form, form * {
-  box-sizing: border-box;
-}
-
-form {
   line-height: 1.35;
 }
 
-/* 3) Cards/sections feel (gentle) */
-form > * {
-  border-radius: 10px;
-}
+form, form * { box-sizing: border-box; }
 
-/* 4) Two columns wrapper (only for "אורך שיבוץ" + "פרטי השיבוץ") */
+/* 2) Two cards side-by-side */
 .km-two-col {
   display: grid !important;
   grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr) !important;
   gap: 16px !important;
-  align-items: start !important;
+  align-items: stretch !important;
   margin-top: 8px;
+  direction: rtl; /* first item appears on the right (RTL) */
 }
 
-/* keep children sane */
 .km-two-col > * {
   min-width: 0;
+  height: 100% !important;
 }
 
-/* 5) Inputs: make them a bit nicer (works for most inputs/selects) */
+/* 3) Make controls feel nicer (gentle) */
 form input[type="text"],
 form input[type="email"],
 form input[type="tel"],
@@ -54,7 +47,6 @@ form select {
   padding: 10px 12px;
 }
 
-/* 6) Buttons: slightly nicer (if Origami uses button/input submit) */
 form button,
 form input[type="submit"],
 form input[type="button"] {
@@ -62,10 +54,7 @@ form input[type="button"] {
   padding: 10px 14px;
 }
 
-/* 7) Reduce excessive vertical whitespace a bit */
-form label {
-  margin-bottom: 6px;
-}
+form label { margin-bottom: 6px; }
 
 form .field,
 form [class*="field"],
@@ -73,192 +62,26 @@ form [class*="Field"] {
   margin-bottom: 10px;
 }
 
-/* 8) Mobile */
+/* 4) The ONLY rule that should stack the two dropdowns in "אורך שיבוץ" */
+.km-length-stack {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+  align-items: stretch !important;
+}
+
+.km-length-stack > * {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* 5) Mobile */
 @media (max-width: 900px) {
   form {
     max-width: 100%;
     padding: 8px 12px;
   }
-
   .km-two-col {
     grid-template-columns: 1fr !important;
   }
-}
-/* Make the 2 columns same height */
-.km-two-col{
-  align-items: stretch !important;
-}
-
-.km-two-col > *{
-  height: 100% !important;
-}
-
-/* Ensure fields inside stack one under another */
-.km-two-col > * *{
-  max-width: 100%;
-}
-/* keep two columns same height (safe) */
-.km-two-col {
-  align-items: stretch !important;
-}
-.km-two-col > * {
-  height: 100% !important;
-}
-
-/* Only inside the "אורך שיבוץ" card: stack the fields vertically */
-.km-section-length {
-  /* לא משנים display של הכרטיס כדי לא לשבור כותרת */
-}
-
-.km-section-length input,
-.km-section-length select,
-.km-section-length textarea,
-.km-section-length .field,
-.km-section-length [class*="field"],
-.km-section-length [class*="Field"] {
-  width: 100%;
-}
-
-/* אם יש שדות שמופיעים בשורה (inline/flex), נכריח אותם לרדת אחד מתחת לשני */
-.km-section-length [style*="display:flex"],
-.km-section-length [style*="display: flex"] {
-  flex-direction: column !important;
-  align-items: stretch !important;
-}
-/* --- Fix layout inside "אורך שיבוץ": force fields to stack --- */
-
-/* כל קונטיינר פנימי שמארגן שדות בשתי עמודות – נהפוך לעמודה אחת */
-.km-section-length .row,
-.km-section-length [class*="row"],
-.km-section-length [class*="Row"],
-.km-section-length [class*="columns"],
-.km-section-length [class*="Columns"],
-.km-section-length [class*="grid"],
-.km-section-length [class*="Grid"] {
-  display: block !important;
-}
-
-/* אם יש קונטיינר שהוא grid אמיתי */
-.km-section-length [style*="grid"],
-.km-section-length [style*="grid-template-columns"] {
-  display: block !important;
-}
-
-/* אם יש קונטיינר שהוא flex */
-.km-section-length [style*="display:flex"],
-.km-section-length [style*="display: flex"] {
-  flex-direction: column !important;
-  align-items: stretch !important;
-}
-
-/* ודאות שהשדות עצמם תופסים רוחב מלא */
-.km-section-length label,
-.km-section-length .field,
-.km-section-length [class*="field"],
-.km-section-length [class*="Field"],
-.km-section-length select,
-.km-section-length input,
-.km-section-length textarea {
-  display: block;
-  width: 100%;
-}
-
-/* מרווח נעים בין שני השדות */
-.km-section-length .field,
-.km-section-length [class*="field"],
-.km-section-length [class*="Field"] {
-  margin-bottom: 12px !important;
-}
-/* Stack the 2 selects in "אורך שיבוץ" one under another */
-.km-section-length :is(div, section)
-  :has(> label)
-  :has(select) {
-  display: block !important;
-}
-
-/* אם אוריגמי שם את שני השדות באותו wrapper של 2 עמודות */
-.km-section-length :is(div, section)
-  :has(> :is(div, section):has(select))
-{
-  display: block !important;
-}
-
-/* כל wrapper שמכיל כמה שדות - להפוך לעמודה */
-.km-section-length :is(div, section)
-  :has(> :is(div, section) > select) {
-  display: block !important;
-}
-
-.km-section-length label,
-.km-section-length select {
-  display: block !important;
-  width: 100% !important;
-  margin-bottom: 10px !important;
-}
-/* Force the "two selects" row in length section to stack */
-.km-length-stack {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 12px !important;
-  align-items: stretch !important;
-}
-
-.km-length-stack > * {
-  width: 100% !important;
-  min-width: 0 !important;
-}
-
-.km-length-stack label,
-.km-length-stack select {
-  display: block !important;
-  width: 100% !important;
-}
-/* Ensure the two cards order is like the original: length on the right, details on the left */
-.km-two-col {
-  direction: rtl; /* RTL grid places first item on the right */
-}
-
-/* Force the inner row (marked by JS) to be 1 column */
-.km-length-stack {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 12px !important;
-}
-
-/* If Origami uses an inner 2-col grid/flex around the two selects – break it */
-.km-section-length .km-length-stack * {
-  max-width: 100%;
-}
-
-.km-section-length .km-length-stack [style*="grid-template-columns"],
-.km-section-length .km-length-stack [class*="grid"],
-.km-section-length .km-length-stack [class*="Grid"] {
-  grid-template-columns: 1fr !important;
-}
-
-.km-section-length .km-length-stack [style*="display:flex"],
-.km-section-length .km-length-stack [style*="display: flex"] {
-  flex-direction: column !important;
-  align-items: stretch !important;
-}
-
-/* Make form controls full width */
-.km-section-length select,
-.km-section-length input,
-.km-section-length textarea {
-  width: 100% !important;
-}
-html[data-km-js="on"] form {
-  outline: 3px solid #00c853 !important; /* מסגרת ירוקה סביב הטופס */
-}
-/* wrap the two fields in "אורך שיבוץ" into a vertical stack */
-.km-length-stack {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 12px !important;
-}
-
-.km-length-stack > * {
-  width: 100% !important;
-  min-width: 0 !important;
 }
