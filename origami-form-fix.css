@@ -195,3 +195,21 @@ form [class*="Field"] {
   width: 100% !important;
   margin-bottom: 10px !important;
 }
+/* Force the "two selects" row in length section to stack */
+.km-length-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  align-items: stretch !important;
+}
+
+.km-length-stack > * {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.km-length-stack label,
+.km-length-stack select {
+  display: block !important;
+  width: 100% !important;
+}
