@@ -109,3 +109,25 @@ form [class*="Field"] {
     grid-template-columns: 1fr !important;
   }
 }
+/* Target the block that contains "מכותבים" by its internal structure */
+#entity-container .km-two-col ~ .form_data_element_wrap,
+#entity-container .km-two-col ~ div .form_data_element_wrap {
+  margin-top: 10px !important;
+  padding: 14px 16px !important;
+  background: #fff !important;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10) !important;
+  position: relative;
+}
+
+/* Thin separator line on top */
+#entity-container .km-two-col ~ .form_data_element_wrap::before,
+#entity-container .km-two-col ~ div .form_data_element_wrap::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 0;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+}
