@@ -1,23 +1,85 @@
-/* 2 columns wrapper */
-.km-two-col {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 24px !important;
-  align-items: start !important;
+/* =========================
+   Origami - nicer layout
+   Works with km-two-col wrapper from JS
+   ========================= */
+
+/* 1) Narrow & center the whole form area */
+form {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  box-sizing: border-box;
 }
 
-/* ensure inner fields don't overflow */
+/* 2) Improve general typography */
+form, form * {
+  box-sizing: border-box;
+}
+
+form {
+  line-height: 1.35;
+}
+
+/* 3) Cards/sections feel (gentle) */
+form > * {
+  border-radius: 10px;
+}
+
+/* 4) Two columns wrapper (only for "אורך שיבוץ" + "פרטי השיבוץ") */
+.km-two-col {
+  display: grid !important;
+  grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr) !important;
+  gap: 16px !important;
+  align-items: start !important;
+  margin-top: 8px;
+}
+
+/* keep children sane */
 .km-two-col > * {
   min-width: 0;
 }
 
-/* "מכותבים" stays full width (we won't wrap it, but just in case) */
-.km-full-width {
-  grid-column: 1 / -1 !important;
+/* 5) Inputs: make them a bit nicer (works for most inputs/selects) */
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form input[type="number"],
+form input[type="search"],
+form input[type="date"],
+form input[type="time"],
+form textarea,
+form select {
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px 12px;
 }
 
-/* Mobile */
+/* 6) Buttons: slightly nicer (if Origami uses button/input submit) */
+form button,
+form input[type="submit"],
+form input[type="button"] {
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+/* 7) Reduce excessive vertical whitespace a bit */
+form label {
+  margin-bottom: 6px;
+}
+
+form .field,
+form [class*="field"],
+form [class*="Field"] {
+  margin-bottom: 10px;
+}
+
+/* 8) Mobile */
 @media (max-width: 900px) {
+  form {
+    max-width: 100%;
+    padding: 8px 12px;
+  }
+
   .km-two-col {
     grid-template-columns: 1fr !important;
   }
