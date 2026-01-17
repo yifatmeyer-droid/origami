@@ -169,3 +169,29 @@ form [class*="Field"] {
 .km-section-length [class*="Field"] {
   margin-bottom: 12px !important;
 }
+/* Stack the 2 selects in "אורך שיבוץ" one under another */
+.km-section-length :is(div, section)
+  :has(> label)
+  :has(select) {
+  display: block !important;
+}
+
+/* אם אוריגמי שם את שני השדות באותו wrapper של 2 עמודות */
+.km-section-length :is(div, section)
+  :has(> :is(div, section):has(select))
+{
+  display: block !important;
+}
+
+/* כל wrapper שמכיל כמה שדות - להפוך לעמודה */
+.km-section-length :is(div, section)
+  :has(> :is(div, section) > select) {
+  display: block !important;
+}
+
+.km-section-length label,
+.km-section-length select {
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 10px !important;
+}
