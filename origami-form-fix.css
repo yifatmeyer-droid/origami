@@ -84,3 +84,24 @@ form [class*="Field"] {
     grid-template-columns: 1fr !important;
   }
 }
+/* Make the 2 columns same height */
+.km-two-col{
+  align-items: stretch !important;
+}
+
+.km-two-col > *{
+  height: 100% !important;
+}
+
+/* Make each card content stack nicely top-to-bottom */
+.km-two-col > *{
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+}
+
+/* Ensure fields inside stack one under another */
+.km-two-col > * *{
+  max-width: 100%;
+}
