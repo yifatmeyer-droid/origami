@@ -131,3 +131,12 @@ form [class*="Field"] {
   height: 1px;
   background: rgba(0,0,0,0.08);
 }
+/* Hide the meeting time summary (start/end/duration) */
+.summary-section.desktop-summary .row.meeting-time {
+  display: none !important;
+}
+/* Smaller logo in the top header */
+form > div:first-child img {
+  max-width: 180px !important; /* אפשר 160 אם את רוצה קטן יותר */
+  height: auto !important;
+}
