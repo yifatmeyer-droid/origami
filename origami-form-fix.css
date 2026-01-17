@@ -248,7 +248,6 @@ form [class*="Field"] {
 .km-section-length textarea {
   width: 100% !important;
 }
-/* DEBUG: if CSS loads, the submit button will turn red */
-button, input[type="submit"] {
-  background: red !important;
+html[data-km-js="on"] form {
+  outline: 3px solid #00c853 !important; /* מסגרת ירוקה סביב הטופס */
 }
