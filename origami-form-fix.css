@@ -213,3 +213,38 @@ form [class*="Field"] {
   display: block !important;
   width: 100% !important;
 }
+/* Ensure the two cards order is like the original: length on the right, details on the left */
+.km-two-col {
+  direction: rtl; /* RTL grid places first item on the right */
+}
+
+/* Force the inner row (marked by JS) to be 1 column */
+.km-length-stack {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+
+/* If Origami uses an inner 2-col grid/flex around the two selects – break it */
+.km-section-length .km-length-stack * {
+  max-width: 100%;
+}
+
+.km-section-length .km-length-stack [style*="grid-template-columns"],
+.km-section-length .km-length-stack [class*="grid"],
+.km-section-length .km-length-stack [class*="Grid"] {
+  grid-template-columns: 1fr !important;
+}
+
+.km-section-length .km-length-stack [style*="display:flex"],
+.km-section-length .km-length-stack [style*="display: flex"] {
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+/* Make form controls full width */
+.km-section-length select,
+.km-section-length input,
+.km-section-length textarea {
+  width: 100% !important;
+}
